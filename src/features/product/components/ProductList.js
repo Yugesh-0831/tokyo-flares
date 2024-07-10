@@ -556,24 +556,32 @@ export default function ProductList() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const products = useSelector(selectAllProducts);
   const [filter, setFilter] = useState({});
+  const [sort, setSort] = useState({});
 
   const handleFilter = (e, section, option) => {
-    const newFilter = { ...filter, [section.id]: option.value };
+    const newFilter = { ...filter };
+    if (e.target.checked) {
+      if (newFilter[section.id]) newFilter[section.id].push(option.value);
+      else {
+        newFilter[section.id] = [option.value];
+      }
+    } else {
+      const index = newFilter[section.id].findIndex(
+        (el) => el === option.value
+      );
+      newFilter[section.id].splice(index, 1);
+    }
     setFilter(newFilter);
-    dispatch(fetchProductsByFiltersAsync(newFilter));
   };
 
   const handleSort = (e, option) => {
-    const newFilter = { ...filter, _sort: option.sort };
-    setFilter(newFilter);
-    dispatch(
-      fetchProductsByFiltersAsync({ filter: newFilter, order: option.order })
-    );
+    const newSort = { ...sort, _sort: option.sort };
+    setSort(newSort);
   };
 
   useEffect(() => {
-    dispatch(fetchAllProductsAsync());
-  }, [dispatch]);
+    dispatch(fetchProductsByFiltersAsync({ filter, sort }));
+  }, [dispatch, filter, sort]);
 
   return (
     <div className="bg-white">
@@ -671,7 +679,7 @@ export default function ProductList() {
               {/* Product grid end */}
             </div>
           </section>
-          {/* <Pagination></Pagination> */}
+          <Pagination></Pagination>
         </main>
       </div>
     </div>

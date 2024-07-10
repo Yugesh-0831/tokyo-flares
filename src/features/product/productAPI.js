@@ -7,20 +7,24 @@ export function fetchAllProducts() {
   });
 }
 
-export function fetchProductsByFilters(filter, order) {
-  // filter = {"category": []}
+export function fetchProductsByFilters(filter, sort) {
   let queryString = "";
   for (let key in filter) {
-    if (order === "desc") queryString += `${key}=-${filter[key]}&`;
-    else queryString += `${key}=${filter[key]}&`;
+    const categoryValues = filter[key];
+    if (categoryValues.length > 0) {
+      const lastCategoryValue = categoryValues[categoryValues.length - 1];
+      queryString += `${key}=${lastCategoryValue}&`;
+    }
+  }
+
+  for (let key in sort) {
+    queryString += `${key}=${sort[key]}&`;
   }
   return new Promise(async (resolve) => {
     const responce = await fetch(
       "http://localhost:8080/products?" + queryString
     );
-    console.log("http://localhost:8080/products?" + queryString);
     const data = await responce.json();
-    console.log(data);
     resolve({ data });
   });
 }
