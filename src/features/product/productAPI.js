@@ -27,10 +27,25 @@ export function fetchProductsByFilters(filter, sort, pagination) {
     const responce = await fetch(
       "http://localhost:8080/products?" + queryString
     );
-    console.log("http://localhost:8080/products?" + queryString);
     const result = await responce.json();
     const data = result.data;
     const totalItems = await responce.headers.get("X-Total-Count");
     resolve({ data: { products: data, totalItems: totalItems } });
+  });
+}
+
+export function fetchCategories() {
+  return new Promise(async (resolve) => {
+    const responce = await fetch("http://localhost:8080/categories");
+    const data = await responce.json();
+    resolve({ data });
+  });
+}
+
+export function fetchBrands() {
+  return new Promise(async (resolve) => {
+    const responce = await fetch("http://localhost:8080/brands");
+    const data = await responce.json();
+    resolve({ data });
   });
 }
