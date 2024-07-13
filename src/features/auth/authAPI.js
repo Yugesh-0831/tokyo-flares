@@ -1,4 +1,3 @@
-// A mock function to mimic making an async request for data
 export function createUser(userData) {
   return new Promise(async (resolve) => {
     const responce = await fetch("http://localhost:8080/users", {

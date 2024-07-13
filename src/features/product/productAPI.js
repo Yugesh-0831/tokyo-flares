@@ -8,6 +8,7 @@ export function fetchAllProducts() {
 }
 
 export function fetchProductsByFilters(filter, sort, pagination) {
+  console.log("idhr aaya");
   let queryString = "";
   for (let key in filter) {
     const categoryValues = filter[key];
@@ -27,10 +28,13 @@ export function fetchProductsByFilters(filter, sort, pagination) {
     const responce = await fetch(
       "http://localhost:8080/products?" + queryString
     );
+    console.log("http://localhost:8080/products?" + queryString);
     const result = await responce.json();
+    console.log("result: " + result);
     const data = result.data;
     const totalItems = await responce.headers.get("X-Total-Count");
-    resolve({ data: { products: data, totalItems: totalItems } });
+    if (data) resolve({ data: { products: data, totalItems: totalItems } });
+    else resolve({ data: { products: result, totalItems: totalItems } });
   });
 }
 

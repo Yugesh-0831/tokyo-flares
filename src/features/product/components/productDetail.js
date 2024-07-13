@@ -4,6 +4,9 @@ import { Radio, RadioGroup } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchproductByIdAsync, selectedProduct } from "../productSlice";
 import { useParams } from "react-router-dom";
+import { addToCart } from "../../cart/cartAPI";
+import { addToCartAsync } from "../../cart/cartSlice";
+import { selectLoggedInUser } from "../../auth/authSlice";
 
 const colors = [
   { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
@@ -40,10 +43,16 @@ export default function ProductDetail() {
   const product = useSelector(selectedProduct);
   const dispatch = useDispatch();
   const params = useParams();
+  const user = useSelector(selectLoggedInUser);
 
   useEffect(() => {
     dispatch(fetchproductByIdAsync(params.id));
   }, [dispatch, params.id]);
+
+  const handleCart = (e) => {
+    e.preventDefault();
+    dispatch(addToCartAsync({ ...product, quantity: 1, user: user.id }));
+  };
 
   return (
     <div className="bg-white">
@@ -101,23 +110,23 @@ export default function ProductDetail() {
             <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
               <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
                 <img
-                  alt={product.images[1].alt}
-                  src={product.images[1].src}
+                  alt={product.images[0].alt}
+                  src={product.images[0].src}
                   className="h-full w-full object-cover object-center"
                 />
               </div>
               <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
                 <img
-                  alt={product.images[2].alt}
-                  src={product.images[2].src}
+                  alt={product.images[0].alt}
+                  src={product.images[0].src}
                   className="h-full w-full object-cover object-center"
                 />
               </div>
             </div>
             <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
               <img
-                alt={product.images[3].alt}
-                src={product.images[3].src}
+                alt={product.images[0].alt}
+                src={product.images[0].src}
                 className="h-full w-full object-cover object-center"
               />
             </div>
@@ -260,6 +269,7 @@ export default function ProductDetail() {
                 </div>
 
                 <button
+                  onClick={handleCart}
                   type="submit"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
