@@ -18,7 +18,7 @@ export function fetchItemsByUserId(userId) {
     resolve({ data });
   });
 }
-
+// not working in json-server??
 export function updateItem(update) {
   return new Promise(async (resolve) => {
     const responce = await fetch("http://localhost:8080/cart/id/" + update.id, {
@@ -31,6 +31,7 @@ export function updateItem(update) {
   });
 }
 
+// not working in json-server??
 export function deleteItemFromCart(itemId) {
   return new Promise(async (resolve) => {
     const responce = await fetch("http://localhost:8080/cart/id/" + itemId, {

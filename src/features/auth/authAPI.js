@@ -27,3 +27,15 @@ export function checkUser(loginInfo) {
     }
   });
 }
+
+export function updateUser(update) {
+  return new Promise(async (resolve) => {
+    const responce = await fetch("http://localhost:8080/users/" + update.id, {
+      method: "PATCH",
+      body: JSON.stringify(update),
+      header: { "content-type": "application/json" },
+    });
+    const data = await responce.json();
+    resolve({ data });
+  });
+}
