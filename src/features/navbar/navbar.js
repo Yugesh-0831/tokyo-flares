@@ -18,7 +18,10 @@ import { Link } from "react-router-dom";
 import { selectCart } from "../cart/cartSlice";
 import { selectLoggedInUser } from "../auth/authSlice";
 
-const navigation = [{ name: "Admin", link: "/admin", admin: "true" }];
+const navigation = [
+  { name: "Admin", link: "/admin", admin: "true" },
+  { name: "Orders", link: "/admin/orders", admin: "true" },
+];
 const userNavigation = [
   { name: "Your Profile", link: "/profile" },
   { name: "My Orders", link: "/orders" },

@@ -9,8 +9,9 @@ import {
 } from "../productSlice";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../../cart/cartAPI";
-import { addToCartAsync } from "../../cart/cartSlice";
+import { addToCartAsync, selectCart } from "../../cart/cartSlice";
 import { selectLoggedInUser } from "../../auth/authSlice";
+import { discountedPrice } from "../../../app/constants";
 
 const colors = [
   { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
@@ -48,6 +49,7 @@ export default function ProductDetail() {
   const dispatch = useDispatch();
   const params = useParams();
   const user = useSelector(selectLoggedInUser);
+  const cart = useSelector(selectCart);
 
   useEffect(() => {
     dispatch(fetchproductByIdAsync(params.id));
@@ -55,9 +57,13 @@ export default function ProductDetail() {
 
   const handleCart = (e) => {
     e.preventDefault();
-    const newItem = { ...product, quantity: 1, user: user.id };
-    delete newItem["id"];
-    dispatch(addToCartAsync(newItem));
+    if (cart.findIndex((item) => item.id === product.id) < 0) {
+      const newItem = { ...product, quantity: 1, user: user.id };
+      delete newItem["id"];
+      dispatch(addToCartAsync(newItem));
+    } else {
+      console.log("item already present in cart");
+    }
   };
 
   return (
@@ -150,7 +156,7 @@ export default function ProductDetail() {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">
-                ${product.price}
+                ${discountedPrice(product)}
               </p>
 
               {/* Reviews */}
