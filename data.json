@@ -1853,6 +1853,24 @@
         "https://i.dummyjson.com/data/products/6/thumbnail.png"
       ],
       "id": "101"
+    },
+    {
+      "id": "b58a",
+      "title": "Macbook air m1",
+      "description": "Macbook air m1",
+      "price": "1000",
+      "discountPercentage": "0",
+      "stock": "20",
+      "brand": "Apple",
+      "category": "laptops",
+      "thumbnail": "https://reviewed-com-res.cloudinary.com/image/fetch/s--pM3BRbA_--/b_white,c_limit,cs_srgb,f_auto,fl_progressive.strip_profile,g_center,h_668,q_auto,w_1187/https://reviewed-production.s3.amazonaws.com/1607081088000/DSC_0877.jpg",
+      "images": [
+        "https://reviewed-com-res.cloudinary.com/image/fetch/s--pM3BRbA_--/b_white,c_limit,cs_srgb,f_auto,fl_progressive.strip_profile,g_center,h_668,q_auto,w_1187/https://reviewed-production.s3.amazonaws.com/1607081088000/DSC_0877.jpg",
+        "https://reviewed-com-res.cloudinary.com/image/fetch/s--pM3BRbA_--/b_white,c_limit,cs_srgb,f_auto,fl_progressive.strip_profile,g_center,h_668,q_auto,w_1187/https://reviewed-production.s3.amazonaws.com/1607081088000/DSC_0877.jpg",
+        "https://reviewed-com-res.cloudinary.com/image/fetch/s--pM3BRbA_--/b_white,c_limit,cs_srgb,f_auto,fl_progressive.strip_profile,g_center,h_668,q_auto,w_1187/https://reviewed-production.s3.amazonaws.com/1607081088000/DSC_0877.jpg",
+        "https://reviewed-com-res.cloudinary.com/image/fetch/s--pM3BRbA_--/b_white,c_limit,cs_srgb,f_auto,fl_progressive.strip_profile,g_center,h_668,q_auto,w_1187/https://reviewed-production.s3.amazonaws.com/1607081088000/DSC_0877.jpg"
+      ],
+      "rating": 0
     }
   ],
   "brands": [
@@ -2502,6 +2520,7 @@
       "id": "6fb1",
       "email": "yugeshjhamb0831@gmail.com",
       "password": "Yugesh@123",
+      "role": "admin",
       "addresses": [
         {
           "name": "Yugesh Jhamb",

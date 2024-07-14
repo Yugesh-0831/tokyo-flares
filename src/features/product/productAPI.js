@@ -62,3 +62,31 @@ export function fetchProductById(id) {
     resolve({ data });
   });
 }
+
+export function createProduct(product) {
+  return new Promise(async (resolve) => {
+    console.log("product banne k liye aaya: " + product.title);
+    const responce = await fetch("http://localhost:8080/products", {
+      method: "POST",
+      body: JSON.stringify(product),
+      headers: { "content-type": "application/json" },
+    });
+    const data = await responce.json();
+    resolve({ data });
+  });
+}
+
+export function updateProduct(update) {
+  return new Promise(async (resolve) => {
+    const responce = await fetch(
+      "http://localhost:8080/products/id/" + update.id,
+      {
+        method: "PATCH",
+        body: JSON.stringify(update),
+        header: { "content-type": "application/json" },
+      }
+    );
+    const data = await responce.json();
+    resolve({ data });
+  });
+}

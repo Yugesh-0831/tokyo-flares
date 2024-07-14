@@ -4,9 +4,8 @@ import { Radio, RadioGroup } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchproductByIdAsync,
-  selectedProduct,
   selectedProductById,
-} from "../productSlice";
+} from "../../product/productSlice";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../../cart/cartAPI";
 import { addToCartAsync } from "../../cart/cartSlice";
@@ -41,7 +40,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductDetail() {
+export default function AdminProductDetail() {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const product = useSelector(selectedProductById);
