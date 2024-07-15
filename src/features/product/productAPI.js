@@ -1,13 +1,5 @@
 // A mock function to mimic making an async request for data
-export function fetchAllProducts() {
-  return new Promise(async (resolve) => {
-    const responce = await fetch("http://localhost:8080/products");
-    const data = await responce.json();
-    resolve({ data });
-  });
-}
-
-export function fetchProductsByFilters(filter, sort, pagination) {
+export function fetchProductsByFilters(filter, sort, pagination, admin) {
   console.log("idhr aaya");
   let queryString = "";
   for (let key in filter) {
@@ -23,6 +15,9 @@ export function fetchProductsByFilters(filter, sort, pagination) {
   }
   for (let key in pagination) {
     queryString += `${key}=${pagination[key]}&`;
+  }
+  if (admin) {
+    queryString += `admin=true`;
   }
   return new Promise(async (resolve) => {
     const responce = await fetch(
@@ -56,8 +51,7 @@ export function fetchBrands() {
 
 export function fetchProductById(id) {
   return new Promise(async (resolve) => {
-    const responce = await fetch("http://localhost:8080/products/?id=" + id);
-    console.log("http://localhost:8080/products/?id=" + id);
+    const responce = await fetch("http://localhost:8080/products/" + id);
     const data = await responce.json();
     resolve({ data });
   });
@@ -79,11 +73,11 @@ export function createProduct(product) {
 export function updateProduct(update) {
   return new Promise(async (resolve) => {
     const responce = await fetch(
-      "http://localhost:8080/products/id/" + update.id,
+      "http://localhost:8080/products/" + update.id,
       {
         method: "PATCH",
         body: JSON.stringify(update),
-        header: { "content-type": "application/json" },
+        headers: { "content-type": "application/json" },
       }
     );
     const data = await responce.json();

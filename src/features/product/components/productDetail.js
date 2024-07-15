@@ -52,14 +52,19 @@ export default function ProductDetail() {
   const cart = useSelector(selectCart);
 
   useEffect(() => {
+    console.log("reload to hua");
+    console.log(params.id);
     dispatch(fetchproductByIdAsync(params.id));
   }, [dispatch, params.id]);
 
   const handleCart = (e) => {
     e.preventDefault();
-    if (cart.findIndex((item) => item.id === product.id) < 0) {
-      const newItem = { ...product, quantity: 1, user: user.id };
-      delete newItem["id"];
+    if (cart.findIndex((item) => item.product.id === product.id) < 0) {
+      const newItem = {
+        product: product.id,
+        quantity: 1,
+        user: user.id,
+      };
       dispatch(addToCartAsync(newItem));
     } else {
       console.log("item already present in cart");

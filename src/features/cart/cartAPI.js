@@ -4,7 +4,7 @@ export function addToCart(item) {
     const responce = await fetch("http://localhost:8080/cart", {
       method: "POST",
       body: JSON.stringify(item),
-      header: { "content-type": "application/json" },
+      headers: { "content-type": "application/json" },
     });
     const data = await responce.json();
     resolve({ data });
@@ -18,25 +18,24 @@ export function fetchItemsByUserId(userId) {
     resolve({ data });
   });
 }
-// not working in json-server??
+
 export function updateItem(update) {
   return new Promise(async (resolve) => {
-    const responce = await fetch("http://localhost:8080/cart/id/" + update.id, {
+    const responce = await fetch("http://localhost:8080/cart/" + update.id, {
       method: "PATCH",
       body: JSON.stringify(update),
-      header: { "content-type": "application/json" },
+      headers: { "content-type": "application/json" },
     });
     const data = await responce.json();
     resolve({ data });
   });
 }
 
-// not working in json-server??
 export function deleteItemFromCart(itemId) {
   return new Promise(async (resolve) => {
-    const responce = await fetch("http://localhost:8080/cart/id/" + itemId, {
+    const responce = await fetch("http://localhost:8080/cart/" + itemId, {
       method: "DELETE",
-      header: { "content-type": "application/json" },
+      headers: { "content-type": "application/json" },
     });
     const data = await responce.json();
     resolve({ data: { id: itemId } });
