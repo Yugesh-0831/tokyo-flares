@@ -119,12 +119,12 @@ export default function ProductList() {
     <div className="bg-white">
       <div>
         {/* Mobile filter dialog */}
-        <MobileFilter
+        {/* <MobileFilter
           mobileFiltersOpen={mobileFiltersOpen}
           setMobileFiltersOpen={setMobileFiltersOpen}
           handleFilter={handleFilter}
           filters={filters}
-        ></MobileFilter>
+        ></MobileFilter> */}
 
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
@@ -177,12 +177,12 @@ export default function ProductList() {
                 </Transition>
               </Menu>
 
-              <button
+              {/* <button
                 type="button"
                 className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7"
               >
-                <span className="sr-only">View grid</span>
-                <Squares2X2Icon className="h-5 w-5" aria-hidden="true" />
+                 <span className="sr-only">View grid</span> 
+                 <Squares2X2Icon className="h-5 w-5" aria-hidden="true" /> 
               </button>
               <button
                 type="button"
@@ -191,27 +191,27 @@ export default function ProductList() {
               >
                 <span className="sr-only">Filters</span>
                 <FunnelIcon className="h-5 w-5" aria-hidden="true" />
-              </button>
+              </button> */}
             </div>
           </div>
 
-          <section aria-labelledby="products-heading" className="pb-24 pt-6">
-            <h2 id="products-heading" className="sr-only">
+          {/* <section aria-labelledby="products-heading" className="pb-24 pt-6"> */}
+          {/* <h2 id="products-heading" className="sr-only">
               Products
-            </h2>
+            </h2> */}
 
-            <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-              <DesktopFilter
+          {/* <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4"> */}
+          {/* <DesktopFilter
                 handleFilter={handleFilter}
                 filters={filters}
-              ></DesktopFilter>
-              {/* Product grid */}
-              <div className="lg:col-span-3">
-                <ProductGrid products={products}></ProductGrid>
-              </div>
-              {/* Product grid end */}
-            </div>
-          </section>
+              ></DesktopFilter> */}
+          {/* Product grid */}
+          {/* <div className="lg:col-span-3"> */}
+          <ProductGrid products={products}></ProductGrid>
+          {/* </div> */}
+          {/* Product grid end */}
+          {/* </div> */}
+          {/* </section> */}
           <Pagination
             page={page}
             setPage={setPage}
@@ -219,6 +219,62 @@ export default function ProductList() {
             totalItems={totalItems}
           ></Pagination>
         </main>
+      </div>
+    </div>
+  );
+}
+
+function ProductGrid({ products }) {
+  return (
+    <div className="bg-white">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          {products.map((product) => (
+            <Link to={`/product-detail/${product.id}`} key={product.id}>
+              <div key={product.id} className="group relative">
+                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-72">
+                  <img
+                    src={product.thumbnail}
+                    alt={product.title}
+                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                  />
+                </div>
+                <div className="mt-4 flex justify-between">
+                  <div>
+                    <h3 className="text-sm text-gray-700">
+                      <a href={product.thumbnail}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {product.title}
+                      </a>
+                    </h3>
+                    <p className="mt-1 text-sm text-gray-500 flex items-center">
+                      <StarIcon className="w-3 h-3 inline"></StarIcon>
+                      <span className="align-bottom">{product.rating}</span>
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">
+                      ${discountedPrice(product)}
+                    </p>
+                    <p className="text-sm line-through font-medium text-gray-400">
+                      ${product.price}
+                    </p>
+                  </div>
+                </div>
+                {product.deleted && (
+                  <div>
+                    <p className="text-sm text-red-400">product deleted</p>
+                  </div>
+                )}
+                {product.stock <= 0 && (
+                  <div>
+                    <p className="text-sm text-red-400">out of stock</p>
+                  </div>
+                )}
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -392,64 +448,5 @@ function DesktopFilter({ handleFilter, filters }) {
         </Disclosure>
       ))}
     </form>
-  );
-}
-function ProductGrid({ products }) {
-  return (
-    <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-900">
-          Products
-        </h2>
-
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {products.map((product) => (
-            <Link to={`/product-detail/${product.id}`} key={product.id}>
-              <div key={product.id} className="group relative">
-                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                  <img
-                    src={product.thumbnail}
-                    alt={product.title}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                  />
-                </div>
-                <div className="mt-4 flex justify-between">
-                  <div>
-                    <h3 className="text-sm text-gray-700">
-                      <a href={product.thumbnail}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {product.title}
-                      </a>
-                    </h3>
-                    <p className="mt-1 text-sm text-gray-500">
-                      <StarIcon className="w-3 h-3 inline"></StarIcon>
-                      <span className="align-bottom">{product.rating}</span>
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-gray-900">
-                      ${discountedPrice(product)}
-                    </p>
-                    <p className="text-sm line-through font-medium text-gray-400">
-                      ${product.price}
-                    </p>
-                  </div>
-                </div>
-                {product.deleted && (
-                  <div>
-                    <p className="text-sm text-red-400">product deleted</p>
-                  </div>
-                )}
-                {product.stock <= 0 && (
-                  <div>
-                    <p className="text-sm text-red-400">out of stock</p>
-                  </div>
-                )}
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
   );
 }

@@ -40,8 +40,9 @@ export function Cart() {
   return (
     <>
       {!items.length && <Navigate to="/" replace={true}></Navigate>}
-      <div className="mx-auto mt-20 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+      <h1 className="font-bold text-2xl mt-14">My Cart</h1>
+      <div className="mx-auto mt-6 max-w-7xl px-4 sm:px-6 lg:px-8 bg-gray-100 shadow-xl rounded-lg">
+        <div className="border-gray-200 px-4 py-6 sm:px-6">
           <div className="flow-root">
             <ul role="list" className="-my-6 divide-y divide-gray-200">
               {items.map((item) => (

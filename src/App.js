@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./App.css";
 import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
@@ -28,8 +27,13 @@ import ProductForm from "./features/admin/components/ProductForm";
 import ProductFormPage from "./pages/AdminProductFormPage";
 import AdminProductFormPage from "./pages/AdminProductFormPage";
 import AdminOrdersPage from "./pages/AdminOrdersPage";
+import Waitlist from "./pages/Waitlist";
 
 const router = createBrowserRouter([
+  // {
+  //   path: "/",
+  //   element: <Waitlist></Waitlist>,
+  // },
   {
     path: "/",
     element: (

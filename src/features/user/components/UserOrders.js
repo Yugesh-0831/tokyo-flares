@@ -9,22 +9,24 @@ export default function UserOrders() {
   const user = useSelector(selectLoggedInUser);
   const orders = useSelector(selectUserOrders);
 
+  console.log("orders: ", orders);
+
   useEffect(() => {
     dispatch(fetchLoggedInUserOrdersAsync(user.id));
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="pb-10">
       {orders &&
         orders.map((order) => (
           <div key={order.id}>
             <div>
-              <div className="mx-auto mt-12 bg-gray-200 max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="border-t border-black px-4 py-6 sm:px-6">
-                  <h1 className="text-4xl my-5 font-bold tracking-tight text-black">
+              <div className="mt-12 bg-gray-100 max-w-7xl px-4 sm:px-6 lg:px-8 rounded-lg shadow-xl">
+                <div className="px-4 py-6 sm:px-6">
+                  <h1 className="text-2xl my-5 font-bold tracking-tight text-black">
                     Order # {order.id}
                   </h1>
-                  <h3 className="text-xl my-5 font-bold tracking-tight text-red-900">
+                  <h3 className="text-l mb-5 font-bold tracking-tight text-indigo-600">
                     Order Status : {order.status}
                   </h3>
                   <div className="flow-root">
@@ -51,9 +53,6 @@ export default function UserOrders() {
                                   ${discountedPrice(item.product)}
                                 </p>
                               </div>
-                              <p className="mt-1 text-sm text-black">
-                                {item.product.brand}
-                              </p>
                             </div>
                             <div className="flex flex-1 items-end justify-between text-sm">
                               <div className="text-black">
@@ -83,7 +82,7 @@ export default function UserOrders() {
                     <p>Total Items in Cart</p>
                     <p>{order.totalItems} items</p>
                   </div>
-                  <p className="mt-0.5 text-sm text-black">
+                  <p className="mt-5 mb-2 text-sm text-black">
                     Shipping Address :
                   </p>
                   <div className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-black">
